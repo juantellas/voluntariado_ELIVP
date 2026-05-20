@@ -448,7 +448,7 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:0 0 20px 0;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:20px">
         <p style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);
-                  text-transform:uppercase;margin:0 0 4px 0">Alcaldía de Barranquilla</p>
+                  text-transform:uppercase;margin:0 0 4px 0">Uninorte x NuestraBarranquilla</p>
         <p style="font-size:17px;font-weight:600;color:#fff;margin:0">ELIVP 2026</p>
         <p style="font-size:11px;color:rgba(255,255,255,0.4);margin:2px 0 0 0">Panel de Inscritos</p>
     </div>
