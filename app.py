@@ -567,8 +567,8 @@ with st.sidebar:
 # ─────────────────────────────────────────
 st.markdown("""
 <div class="dashboard-header">
-    <h1>Caracterización de Inscritos - Prueba Inicial</h1>
-    <p>Escuela de Liderazgo e Innovación Pública &nbsp;·&nbsp; Mayo 2026 &nbsp;·&nbsp; Barranquilla &nbsp;·&nbsp; Universidad Del Norte</p>
+    <h1>Caracterización de Inscritos - Prueba Final</h1>
+    <p>Escuela de Liderazgo e Innovación Pública &nbsp;·&nbsp; Mayo 2026 &nbsp;·&nbsp; Barranquilla &nbsp;·&nbsp; Universidad Del Norte x NuestraBarranquilla</p>
 </div>
 """, unsafe_allow_html=True)
 
