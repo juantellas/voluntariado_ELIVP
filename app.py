@@ -27,16 +27,13 @@ html, body, [class*="css"] {
     color: #D9DDDC !important;
 }
 
-/* ── Fondo principal ── */
 .main .block-container {
-    background-color: #0f1923 ;
+    background-color: #0f1923;
     padding-top: 0 !important;
     padding-bottom: 3rem;
     max-width: 100% !important;
 }
-.main {
-    background-color: #0f1923 ;
-}
+.main { background-color: #0f1923; }
 
 /* ── Cabecera ── */
 .dashboard-header {
@@ -46,7 +43,6 @@ html, body, [class*="css"] {
     padding: 20px 30px;
     margin: 20px auto 30px auto;
     max-width: 900px;
-
     box-shadow: 0 8px 25px rgba(0,0,0,0.35);
 }
 .dashboard-header h1 {
@@ -62,14 +58,66 @@ html, body, [class*="css"] {
     margin: 0;
 }
 
+/* ── Toggle de filtro ── */
+.toggle-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #131e2b;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 24px;
+}
+.toggle-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+}
+.toggle-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: #4ade80;
+    text-transform: uppercase;
+}
+.toggle-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    display: inline-block;
+}
+.toggle-inactive {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+}
+
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
     background-color: #0f1923 !important;
     border-right: none !important;
 }
-[data-testid="stSidebar"] * {
-    color: rgba(255,255,255,0.85) !important;
-}
+[data-testid="stSidebar"] * { color: rgba(255,255,255,0.85) !important; }
 [data-testid="stSidebar"] .stMultiSelect label,
 [data-testid="stSidebar"] .stSelectbox label {
     color: rgba(255,255,255,0.45) !important;
@@ -85,6 +133,15 @@ html, body, [class*="css"] {
     background-color: rgba(255,255,255,0.06) !important;
     border-color: rgba(255,255,255,0.12) !important;
     border-radius: 8px !important;
+}
+
+/* ── Toggle nativo de Streamlit ── */
+[data-testid="stToggle"] label {
+    color: rgba(255,255,255,0.6) !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
 }
 
 /* ── Cards de gráfica ── */
@@ -125,6 +182,7 @@ html, body, [class*="css"] {
 .kpi-blue::before  { background: #1a5cff; }
 .kpi-amber::before { background: #e8900a; }
 .kpi-green::before { background: #0f8c5c; }
+.kpi-violet::before { background: #7c3aed; }
 .kpi-label {
     font-size: 9px;
     font-weight: 600;
@@ -148,9 +206,43 @@ html, body, [class*="css"] {
     padding: 3px 9px;
     border-radius: 20px;
 }
-.kpi-blue  .kpi-badge { background: #dce8ff; color: #1a5cff; }
-.kpi-amber .kpi-badge { background: #fff3d6; color: #9a5e00; }
-.kpi-green .kpi-badge { background: #d6f5e9; color: #0f8c5c; }
+.kpi-blue   .kpi-badge { background: #dce8ff; color: #1a5cff; }
+.kpi-amber  .kpi-badge { background: #fff3d6; color: #9a5e00; }
+.kpi-green  .kpi-badge { background: #d6f5e9; color: #0f8c5c; }
+.kpi-violet .kpi-badge { background: #ede9fe; color: #7c3aed; }
+
+/* ── Banner seleccionados ── */
+.banner-seleccionados {
+    background: linear-gradient(135deg, #052e16 0%, #0a1a0f 100%);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 12px;
+    padding: 14px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.banner-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(74,222,128,0.5);
+}
+.banner-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #4ade80;
+    text-transform: uppercase;
+}
+.banner-count {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    color: #4ade80;
+    font-weight: 500;
+}
 
 /* ── Divisores de sección ── */
 .section-header {
@@ -193,10 +285,7 @@ html, body, [class*="css"] {
     border-bottom: 2px solid #1a5cff !important;
 }
 
-/* ── Ocultar métricas nativas (usamos HTML) ── */
 [data-testid="metric-container"] { display: none; }
-
-/* ── Ocultar decoraciones Streamlit ── */
 #MainMenu, footer, header { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -214,32 +303,22 @@ def limpiar_texto(s):
     s = " ".join(s.split())
     return s
 
+def limpiar_objetivo(x):
+    if pd.isna(x):
+        return "N/A"
+    return str(x).split(":")[0].strip()
 
-# Paleta (dark mode consistente)
 ACCENT     = "#1a5cff"
 AMBER      = "#e8900a"
 GREEN      = "#0f8c5c"
 SLATE      = "#94a3b8"
-
-# Texto
 INK        = "#ffffff"
 INK_MID    = "rgba(255,255,255,0.75)"
 INK_LIGHT  = "rgba(255,255,255,0.5)"
-
-# UI
 BORDER     = "rgba(255,255,255,0.08)"
 SURFACE    = "#1a1a2e"
-
-# Colores gráficos
 COLORS_PIE = [ACCENT, "#5e8af5", "#93b4fc", SLATE, AMBER, GREEN]
-
-COLOR_SEQ  = [
-    "#1a5cff",
-    "#5e8af5",
-    "#93b4fc",
-    "#c7d8ff",
-    "#e2e8f0"
-]
+COLOR_SEQ  = ["#1a5cff", "#5e8af5", "#93b4fc", "#c7d8ff", "#e2e8f0"]
 
 PLOTLY_BASE = dict(
     paper_bgcolor="#1a1a2e",
@@ -248,20 +327,17 @@ PLOTLY_BASE = dict(
     font_color=INK_MID,
 )
 
-def section(label: str) -> None:
+def section(label):
     st.markdown(f'<div class="section-header">{label}</div>', unsafe_allow_html=True)
 
-
-def card_open(title: str) -> None:
+def card_open(title):
     st.markdown(
         f'<div class="chart-card"><p class="chart-card-title">{title}</p>',
         unsafe_allow_html=True,
     )
 
-
-def card_close() -> None:
+def card_close():
     st.markdown("</div>", unsafe_allow_html=True)
-
 
 def kpi_html(valor, label, badge_text, css_class):
     return (
@@ -272,48 +348,30 @@ def kpi_html(valor, label, badge_text, css_class):
         f'</div>'
     )
 
-
 def make_donut(labels, values, colors, height=240):
     fig = go.Figure(go.Pie(
-        labels=labels,
-        values=values,
-        hole=0.68,
-        marker_colors=colors,
-        textinfo="none",
+        labels=labels, values=values, hole=0.68,
+        marker_colors=colors, textinfo="none",
         hovertemplate="<b>%{label}</b>: %{value:,} (%{percent})<extra></extra>",
     ))
     fig.update_layout(
-        **PLOTLY_BASE,
-        showlegend=True,
-        height=height,
+        **PLOTLY_BASE, showlegend=True, height=height,
         margin=dict(l=8, r=8, t=8, b=56),
-        legend=dict(
-            orientation="h",
-            x=0.5, xanchor="center",
-            y=-0.05, yanchor="top",
-            font_size=10,
-            font_color=INK_MID,
-        ),
+        legend=dict(orientation="h", x=0.5, xanchor="center",
+                    y=-0.05, yanchor="top", font_size=10, font_color=INK_MID),
     )
     return fig
-
 
 def make_bar_h(data, col_y, col_x, color, height=None, margin=None):
     h = height or max(220, len(data) * 38)
     m = margin or dict(l=4, r=36, t=8, b=8)
     fig = go.Figure(go.Bar(
-        x=data[col_x],
-        y=data[col_y],
-        orientation="h",
-        marker_color=color,
-        marker_line_width=0,
+        x=data[col_x], y=data[col_y], orientation="h",
+        marker_color=color, marker_line_width=0,
         hovertemplate="<b>%{y}</b>: %{x:,}<extra></extra>",
     ))
     fig.update_layout(
-        **PLOTLY_BASE,
-        showlegend=False,
-        height=h,
-        margin=m,
+        **PLOTLY_BASE, showlegend=False, height=h, margin=m,
         yaxis=dict(autorange="reversed", tickfont_size=11,
                    gridcolor=SURFACE, showgrid=True),
         xaxis=dict(gridcolor=BORDER, tickfont_size=10, showgrid=True),
@@ -339,8 +397,21 @@ def cargar_datos():
                 "GruposPoblacionales", "MiembroOrganizacionJuvenil"]:
         if col in df.columns:
             df[col] = df[col].apply(limpiar_texto)
-    return df
 
+    # Normalizar columna Seleccionado
+    if "Seleccionado" in df.columns:
+        df["Seleccionado"] = (
+            df["Seleccionado"]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .map({"si": "Si", "sí": "Si", "no": "No"})
+            .fillna("No")
+        )
+    else:
+        df["Seleccionado"] = "No"
+
+    return df
 
 @st.cache_data
 def cargar_geo():
@@ -352,7 +423,6 @@ def cargar_geo():
         return gdf
     except Exception:
         return None
-
 
 df  = cargar_datos()
 gdf = cargar_geo()
@@ -377,17 +447,30 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
+    # ── Toggle seleccionados ──────────────────────
+    solo_seleccionados = st.toggle(
+        "Solo seleccionados",
+        value=False,
+        help="Muestra únicamente candidatos con Seleccionado = Sí"
+    )
+
+    st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
+
     genero_opts    = sorted(df["Genero"].dropna().unique().tolist())
     localidad_opts = sorted(df["Localidad"].dropna().unique().tolist())
     estrato_opts   = sorted(df["Estrato"].dropna().unique().tolist())
 
-    f_genero    = st.multiselect("Género",        genero_opts,                placeholder="Todos")
-    f_localidad = st.multiselect("Localidad",     localidad_opts,             placeholder="Todas")
-    f_estrato   = st.multiselect("Estrato",       estrato_opts,               placeholder="Todos")
-    f_rango     = st.multiselect("Rango de edad", ["18–28", "Fuera de rango"], placeholder="Todos")
+    f_genero    = st.multiselect("Género",         genero_opts,                 placeholder="Todos")
+    f_localidad = st.multiselect("Localidad",      localidad_opts,              placeholder="Todas")
+    f_estrato   = st.multiselect("Estrato",        estrato_opts,                placeholder="Todos")
+    f_rango     = st.multiselect("Rango de edad",  ["18–28", "Fuera de rango"], placeholder="Todos")
 
     # ── Aplicar filtros ──
     df_f = df.copy()
+
+    if solo_seleccionados:
+        df_f = df_f[df_f["Seleccionado"] == "Si"]
+
     if f_genero:    df_f = df_f[df_f["Genero"].isin(f_genero)]
     if f_localidad: df_f = df_f[df_f["Localidad"].isin(f_localidad)]
     if f_estrato:   df_f = df_f[df_f["Estrato"].isin(f_estrato)]
@@ -413,10 +496,25 @@ with st.sidebar:
 # ─────────────────────────────────────────
 st.markdown("""
 <div class="dashboard-header">
-    <h1>Caracterización de Inscritos - Prueba Inicial</h1>
+    <h1>Caracterización de Inscritos - Prueba Final</h1>
     <p>Escuela de Liderazgo e Innovación Pública &nbsp;·&nbsp; Mayo 2026 &nbsp;·&nbsp; Barranquilla &nbsp;·&nbsp; Universidad Del Norte</p>
 </div>
 """, unsafe_allow_html=True)
+
+
+# ─────────────────────────────────────────
+# BANNER SELECCIONADOS (visible solo si toggle activo)
+# ─────────────────────────────────────────
+total_seleccionados = int((df["Seleccionado"] == "Si").sum())
+
+if solo_seleccionados:
+    st.markdown(f"""
+    <div class="banner-seleccionados">
+        <div class="banner-dot"></div>
+        <span class="banner-text">Mostrando únicamente candidatos seleccionados</span>
+        <span class="banner-count">{len(df_f):,} / {total_seleccionados:,}</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────
@@ -426,21 +524,43 @@ total    = len(df_f)
 en_rango = int((df_f["RangoEdad"] == "18–28").sum())
 fuera    = int((df_f["RangoEdad"] != "18–28").sum())
 
-k1, k2, k3 = st.columns(3)
-with k1:
-    st.markdown(kpi_html(
-        f"{total:,}", "Total inscritos", "Todos los registros", "kpi-blue"
-    ), unsafe_allow_html=True)
-with k2:
-    st.markdown(kpi_html(
-        f"{en_rango:,}", "En rango 18–28",
-        f"{en_rango / max(total, 1) * 100:.1f}% del total", "kpi-amber"
-    ), unsafe_allow_html=True)
-with k3:
-    st.markdown(kpi_html(
-        f"{fuera:,}", "Fuera de rango",
-        f"{fuera / max(total, 1) * 100:.1f}% del total", "kpi-green"
-    ), unsafe_allow_html=True)
+if solo_seleccionados:
+    k1, k2, k3, k4 = st.columns(4)
+    with k1:
+        st.markdown(kpi_html(
+            f"{total:,}", "Seleccionados", "Vista filtrada", "kpi-violet"
+        ), unsafe_allow_html=True)
+    with k2:
+        st.markdown(kpi_html(
+            f"{total_seleccionados:,}", "Total seleccionados",
+            f"{total_seleccionados / max(len(df), 1) * 100:.1f}% del universo", "kpi-green"
+        ), unsafe_allow_html=True)
+    with k3:
+        st.markdown(kpi_html(
+            f"{en_rango:,}", "En rango 18–28",
+            f"{en_rango / max(total, 1) * 100:.1f}% del filtrado", "kpi-amber"
+        ), unsafe_allow_html=True)
+    with k4:
+        st.markdown(kpi_html(
+            f"{fuera:,}", "Fuera de rango",
+            f"{fuera / max(total, 1) * 100:.1f}% del filtrado", "kpi-blue"
+        ), unsafe_allow_html=True)
+else:
+    k1, k2, k3 = st.columns(3)
+    with k1:
+        st.markdown(kpi_html(
+            f"{total:,}", "Total inscritos", "Todos los registros", "kpi-blue"
+        ), unsafe_allow_html=True)
+    with k2:
+        st.markdown(kpi_html(
+            f"{en_rango:,}", "En rango 18–28",
+            f"{en_rango / max(total, 1) * 100:.1f}% del total", "kpi-amber"
+        ), unsafe_allow_html=True)
+    with k3:
+        st.markdown(kpi_html(
+            f"{fuera:,}", "Fuera de rango",
+            f"{fuera / max(total, 1) * 100:.1f}% del total", "kpi-green"
+        ), unsafe_allow_html=True)
 
 st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
@@ -455,18 +575,12 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "  Datos  ",
 ])
 
-def limpiar_objetivo(x):
-    if pd.isna(x):
-        return "N/A"
-    x = str(x)
-    return x.split(":")[0].strip()
 
 # ════════════════════════════════════════
 # TAB 1 — CARACTERIZACIÓN
 # ════════════════════════════════════════
 with tab1:
 
-    # ── Fila 1: Género · Rango edad ──────────────────────────────────────
     section("Género y edad")
     c1, c2 = st.columns(2)
 
@@ -490,151 +604,56 @@ with tab1:
         )
         card_close()
 
-    # ── Fila 2: Nivel educativo · Grupos poblacionales ────────────────────
-# ─────────────────────────────────────────
-# LIMPIEZA OBJETIVOS (IMPORTANTE)
-# ─────────────────────────────────────────
-
-
-# ─────────────────────────────────────────
-# LIMPIEZA OBJETIVO
-# ─────────────────────────────────────────
-
-    def limpiar_objetivo(x):
-        if pd.isna(x):
-            return "N/A"
-        return str(x).split(":")[0].strip()
-
     df_f["Objetivo_limpio"] = df_f["ObjetivoOrganizacionJuvenil"].apply(limpiar_objetivo)
-
-
-# ─────────────────────────────────────────
-# SECCIÓN
-# ─────────────────────────────────────────
 
     section("Participación juvenil y territorio")
 
-
-    # ── FILA 1 ─────────────────────────────────────────
     o1, o2 = st.columns([1, 2])
 
-
-    # ── Donut: Organización juvenil
     with o1:
         org = df_f["MiembroOrganizacionJuvenil"].value_counts().reset_index()
         org.columns = ["Miembro", "Cantidad"]
-
         card_open("Organización juvenil")
-
         st.plotly_chart(
-            make_donut(
-                org["Miembro"],
-                org["Cantidad"],
-                [GREEN, "#e0e5ec"],
-                height=250
-            ),
+            make_donut(org["Miembro"], org["Cantidad"], [GREEN, "#e0e5ec"], height=250),
             use_container_width=True,
         )
-
         card_close()
 
-
-    # ── Horarios
     with o2:
-        loc_top = (
-            df_f["DisponibilidadHorario"]
-            .value_counts()
-            .reset_index()
-        )
-
+        loc_top = df_f["DisponibilidadHorario"].value_counts().reset_index()
         loc_top.columns = ["Disponibilidad", "Inscritos"]
-
         card_open("Horarios por Inscritos")
-
         st.plotly_chart(
-            make_bar_h(
-                loc_top,
-                "Disponibilidad",
-                "Inscritos",
-                "#93b4fc",
-                height=200
-            ),
+            make_bar_h(loc_top, "Disponibilidad", "Inscritos", "#93b4fc", height=200),
             use_container_width=True,
         )
-
         card_close()
-
 
     c1, c2 = st.columns(2)
 
-
-    # ── Experiencia Voluntariado ─────────────
     with c1:
-
-        exp = (
-            df_f["ExperienciaVoluntariado"]
-            .value_counts()
-            .reset_index()
-        )
-
+        exp = df_f["ExperienciaVoluntariado"].value_counts().reset_index()
         exp.columns = ["Experiencia", "Inscritos"]
         exp = exp.sort_values("Inscritos", ascending=False)
-
         card_open("Experiencia en Voluntariado")
-
-        fig_exp = px.bar(
-            exp,
-            x="Experiencia",
-            y="Inscritos",
-            color_discrete_sequence=["#1a5cff"]
-        )
-
-        fig_exp.update_layout(
-            **PLOTLY_BASE,
-            height=320,
-            xaxis_title="",
-            yaxis_title="Inscritos"
-        )
-
+        fig_exp = px.bar(exp, x="Experiencia", y="Inscritos",
+                         color_discrete_sequence=["#1a5cff"])
+        fig_exp.update_layout(**PLOTLY_BASE, height=320,
+                               xaxis_title="", yaxis_title="Inscritos")
         st.plotly_chart(fig_exp, use_container_width=True)
-
         card_close()
 
-
-    # ── Participación Organización Juvenil ──
     with c2:
-
-        obj_org = (
-            df_f["Objetivo_limpio"]
-            .value_counts()
-            .reset_index()
-        )
-
+        obj_org = df_f["Objetivo_limpio"].value_counts().reset_index()
         obj_org.columns = ["Objetivo", "Inscritos"]
         obj_org = obj_org.sort_values("Inscritos", ascending=True)
-
         card_open("Objetivo de la Organización Juvenil")
-
         st.plotly_chart(
-            make_bar_h(
-                obj_org,
-                "Objetivo",
-                "Inscritos",
-                "#e8900a",
-                height=260
-            ),
+            make_bar_h(obj_org, "Objetivo", "Inscritos", "#e8900a", height=260),
             use_container_width=True,
         )
-
         card_close()
-
-    # ─────────────────────────────────────────
-    # FILA 3 - OBJETIVO ORGANIZACIÓN
-    # ─────────────────────────────────────────
-
-
-
-
 
 
 # ════════════════════════════════════════
@@ -642,7 +661,6 @@ with tab1:
 # ════════════════════════════════════════
 with tab2:
 
-    # ── Fila 1: Estrato (barras) · Localidades (barras h) ────────────────
     section("Distribución socioeconómica")
     s1, s2 = st.columns([1, 2])
 
@@ -666,9 +684,7 @@ with tab2:
             hovertemplate="Estrato %{x}: %{y:,}<extra></extra>",
         ))
         fig_estrato.update_layout(
-            **PLOTLY_BASE,
-            showlegend=False,
-            height=290,
+            **PLOTLY_BASE, showlegend=False, height=290,
             margin=dict(l=4, r=12, t=24, b=8),
             xaxis=dict(title=None, tickfont_size=12, gridcolor=SURFACE),
             yaxis=dict(gridcolor=BORDER, tickfont_size=10),
@@ -693,7 +709,6 @@ with tab2:
         )
         card_close()
 
-    # ── Fila 2: Cruce Estrato × Género · Donut de estrato ────────────────
     section("Cruce y proporción")
     cr1, cr2 = st.columns([2, 1])
 
@@ -711,18 +726,11 @@ with tab2:
                 color_discrete_sequence=[ACCENT, "#93b4fc", SLATE, "#c7d8ff"],
             )
             fig_cross.update_layout(
-                **PLOTLY_BASE,
-                showlegend=True,
-                height=290,
+                **PLOTLY_BASE, showlegend=True, height=290,
                 margin=dict(l=4, r=12, t=40, b=8),
-                legend=dict(
-                    orientation="h",
-                    x=0.5, xanchor="center",
-                    y=1.22, yanchor="top",
-                    font_size=10,
-                    font_color=INK_MID,
-                    bgcolor="rgba(0,0,0,0)",
-                ),
+                legend=dict(orientation="h", x=0.5, xanchor="center",
+                            y=1.22, yanchor="top", font_size=10,
+                            font_color=INK_MID, bgcolor="rgba(0,0,0,0)"),
                 xaxis=dict(title="Estrato", tickfont_size=12),
                 yaxis=dict(gridcolor=BORDER, tickfont_size=10),
             )
@@ -734,14 +742,130 @@ with tab2:
     with cr2:
         card_open("Proporción por estrato")
         st.plotly_chart(
+            make_donut(estrato_data["Estrato"].tolist(),
+                       estrato_data["Cantidad"].tolist(),
+                       COLOR_SEQ[:len(estrato_data)], height=290),
+            use_container_width=True,
+        )
+        card_close()
+
+    # ── Nivel educativo ───────────────────────────────────────────────────
+    section("Nivel educativo")
+
+    edu_data = (
+        df_f["NivelEducativo"]
+        .value_counts()
+        .reset_index()
+        .rename(columns={"NivelEducativo": "Nivel", "count": "Cantidad"})
+    )
+
+    # Orden jerárquico educativo
+    orden_edu = [
+        "PRIMARIA", "BACHILLERATO", "TECNICO", "TECNOLOGO",
+        "UNIVERSITARIO", "ESPECIALIZACION", "MAESTRIA", "DOCTORADO"
+    ]
+    edu_data["_orden"] = edu_data["Nivel"].apply(
+        lambda x: orden_edu.index(x) if x in orden_edu else 99
+    )
+    edu_data = edu_data.sort_values("_orden").drop(columns="_orden")
+
+    e1, e2 = st.columns([1, 2])
+
+    with e1:
+        # Donut de distribución educativa
+        card_open("Distribución por nivel educativo")
+        st.plotly_chart(
             make_donut(
-                estrato_data["Estrato"].tolist(),
-                estrato_data["Cantidad"].tolist(),
-                COLOR_SEQ[:len(estrato_data)],
-                height=290,
+                edu_data["Nivel"].tolist(),
+                edu_data["Cantidad"].tolist(),
+                [ACCENT, "#5e8af5", "#93b4fc", "#c7d8ff",
+                 AMBER, "#f5b942", GREEN, "#2dd4a0"],
+                height=300,
             ),
             use_container_width=True,
         )
+        card_close()
+
+    with e2:
+        # Barras horizontales ordenadas jerárquicamente
+        card_open("Inscritos por nivel educativo")
+        fig_edu = go.Figure()
+
+        colores_edu = [
+            "#c7d8ff", "#93b4fc", "#5e8af5", "#1a5cff",
+            "#f5b942", "#e8900a", "#2dd4a0", "#0f8c5c",
+        ]
+
+        for i, row in edu_data.iterrows():
+            color_idx = edu_data.index.tolist().index(i) % len(colores_edu)
+            fig_edu.add_trace(go.Bar(
+                x=[row["Cantidad"]],
+                y=[row["Nivel"]],
+                orientation="h",
+                marker_color=colores_edu[color_idx],
+                marker_line_width=0,
+                text=[f"  {row['Cantidad']:,}"],
+                textposition="outside",
+                textfont=dict(size=10, family="DM Mono", color=INK_MID),
+                hovertemplate=f"<b>{row['Nivel']}</b>: {row['Cantidad']:,}<extra></extra>",
+                showlegend=False,
+            ))
+
+        fig_edu.update_layout(
+            **PLOTLY_BASE,
+            showlegend=False,
+            height=max(260, len(edu_data) * 42),
+            margin=dict(l=4, r=60, t=8, b=8),
+            barmode="overlay",
+            yaxis=dict(
+                categoryorder="array",
+                categoryarray=edu_data["Nivel"].tolist()[::-1],
+                tickfont_size=11,
+                gridcolor=SURFACE,
+            ),
+            xaxis=dict(gridcolor=BORDER, tickfont_size=10, showgrid=True),
+        )
+        st.plotly_chart(fig_edu, use_container_width=True)
+        card_close()
+
+    # Cruce NivelEducativo × Género (ancho completo)
+    if df_f["Genero"].nunique() > 0 and df_f["NivelEducativo"].nunique() > 0:
+        cross_edu = (
+            df_f.groupby(["NivelEducativo", "Genero"])
+            .size()
+            .reset_index(name="Cantidad")
+        )
+        # Aplicar orden jerárquico
+        cross_edu["_orden"] = cross_edu["NivelEducativo"].apply(
+            lambda x: orden_edu.index(x) if x in orden_edu else 99
+        )
+        cross_edu = cross_edu.sort_values("_orden").drop(columns="_orden")
+
+        fig_cross_edu = px.bar(
+            cross_edu,
+            x="NivelEducativo",
+            y="Cantidad",
+            color="Genero",
+            barmode="group",
+            color_discrete_sequence=[ACCENT, "#93b4fc", SLATE, "#c7d8ff"],
+            category_orders={"NivelEducativo": edu_data["Nivel"].tolist()},
+        )
+        fig_cross_edu.update_layout(
+            **PLOTLY_BASE,
+            showlegend=True,
+            height=300,
+            margin=dict(l=4, r=12, t=40, b=8),
+            legend=dict(
+                orientation="h", x=0.5, xanchor="center",
+                y=1.18, yanchor="top", font_size=10,
+                font_color=INK_MID, bgcolor="rgba(0,0,0,0)",
+            ),
+            xaxis=dict(title=None, tickfont_size=11, tickangle=-20),
+            yaxis=dict(gridcolor=BORDER, tickfont_size=10),
+        )
+        fig_cross_edu.update_traces(marker_line_width=0)
+        card_open("Nivel educativo × Género")
+        st.plotly_chart(fig_cross_edu, use_container_width=True)
         card_close()
 
 
@@ -749,11 +873,7 @@ with tab2:
 # TAB 3 — MAPA
 # ════════════════════════════════════════
 with tab3:
-    modo = st.radio(
-        "Modo de visualización",
-        ["Por Barrio", "Por Localidad"],
-        horizontal=True,
-    )
+    modo = st.radio("Modo de visualización", ["Por Barrio", "Por Localidad"], horizontal=True)
 
     if gdf is not None:
         label_col = "Barrio" if modo == "Por Barrio" else "Localidad"
@@ -814,7 +934,7 @@ with tab4:
     cols_show = [c for c in [
         "Genero", "Localidad", "Barrio", "Estrato",
         "NivelEducativo", "GruposPoblacionales",
-        "MiembroOrganizacionJuvenil", "Edad", "RangoEdad",
+        "MiembroOrganizacionJuvenil", "Edad", "RangoEdad", "Seleccionado",
     ] if c in df_f.columns]
 
     card_open("Tabla de datos")
