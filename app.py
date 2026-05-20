@@ -14,6 +14,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Forzar sidebar abierto en entornos deployed
+st.markdown("""
+<style>
+[data-testid="collapsedControl"] { display: none !important; }
+[data-testid="stSidebar"] { transform: none !important; min-width: 280px !important; }
+</style>
+""", unsafe_allow_html=True)
+
 # ─────────────────────────────────────────
 # ESTILOS GLOBALES
 # ─────────────────────────────────────────
