@@ -400,14 +400,19 @@ def cargar_datos():
 
     # Normalizar columna Seleccionado
     if "Seleccionado" in df.columns:
-        df["Seleccionado"] = (
-            df["Seleccionado"]
-            .astype(str)
-            .str.strip()
-            .str.lower()
-            .map({"si": "Si", "sí": "Si", "no": "No"})
-            .fillna("No")
-        )
+        def normalizar_seleccionado(x):
+            if pd.isna(x):
+                return "No"
+            s = str(x).strip()
+            sl = s.lower()
+            if "opcion 1" in sl or "opción 1" in sl:
+                return "Si (Opcion 1)"
+            if "opcion 2" in sl or "opción 2" in sl:
+                return "Si (Opcion 2)"
+            if sl in ["si", "sí"]:
+                return "Si"
+            return "No"
+        df["Seleccionado"] = df["Seleccionado"].apply(normalizar_seleccionado)
     else:
         df["Seleccionado"] = "No"
 
@@ -451,8 +456,65 @@ with st.sidebar:
     solo_seleccionados = st.toggle(
         "Solo seleccionados",
         value=False,
-        help="Muestra únicamente candidatos con Seleccionado = Sí"
+        help="Muestra únicamente candidatos seleccionados (Opción 1 y/o Opción 2)"
     )
+
+    # ── Filtro de opción (solo visible si toggle activo) ──
+    f_opcion = []
+    if solo_seleccionados:
+        st.markdown(
+            '<p style="font-size:9px;font-weight:600;letter-spacing:2px;'
+            'text-transform:uppercase;color:rgba(74,222,128,0.5);'
+            'margin:10px 0 6px 0">Horario asignado</p>',
+            unsafe_allow_html=True,
+        )
+        f_opcion = st.multiselect(
+            "Opción de horario",
+            ["Si (Opcion 1)", "Si (Opcion 2)"],
+            placeholder="Todas las opciones",
+            label_visibility="collapsed",
+        )
+
+        st.markdown("""
+        <div style="
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 8px;
+        ">
+            <p style="
+                font-family:'DM Mono',monospace;
+                font-size:0.68rem;
+                letter-spacing:0.1em;
+                color:rgba(129,140,248,0.9);
+                text-transform:uppercase;
+                margin:0 0 6px 0;
+            ">● Opción 1</p>
+            <p style="
+                font-family:'DM Sans',sans-serif;
+                font-size:0.78rem;
+                color:rgba(255,255,255,0.35);
+                margin:0 0 10px 0;
+                line-height:1.5;
+            ">Martes y Jueves<br>2:00 PM – 6:00 PM</p>
+            <p style="
+                font-family:'DM Mono',monospace;
+                font-size:0.68rem;
+                letter-spacing:0.1em;
+                color:rgba(52,211,153,0.9);
+                text-transform:uppercase;
+                margin:0 0 6px 0;
+            ">● Opción 2</p>
+            <p style="
+                font-family:'DM Sans',sans-serif;
+                font-size:0.78rem;
+                color:rgba(255,255,255,0.35);
+                margin:0;
+                line-height:1.5;
+            ">Viernes 2:00 PM – 6:00 PM<br>Sábados 9:00 AM – 1:00 PM</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
 
@@ -469,7 +531,8 @@ with st.sidebar:
     df_f = df.copy()
 
     if solo_seleccionados:
-        df_f = df_f[df_f["Seleccionado"] == "Si"]
+        opciones_seleccionadas = f_opcion if f_opcion else ["Si (Opcion 1)", "Si (Opcion 2)"]
+        df_f = df_f[df_f["Seleccionado"].isin(opciones_seleccionadas)]
 
     if f_genero:    df_f = df_f[df_f["Genero"].isin(f_genero)]
     if f_localidad: df_f = df_f[df_f["Localidad"].isin(f_localidad)]
@@ -496,8 +559,8 @@ with st.sidebar:
 # ─────────────────────────────────────────
 st.markdown("""
 <div class="dashboard-header">
-    <h1>Caracterización de Inscritos - Prueba Final</h1>
-    <p>Escuela de Liderazgo e Innovación Pública &nbsp;·&nbsp; Mayo 2026 &nbsp;·&nbsp; Barranquilla &nbsp;·&nbsp; Universidad Del Norte x NuestraBarranquilla</p>
+    <h1>Caracterización de Inscritos - Prueba Inicial</h1>
+    <p>Escuela de Liderazgo e Innovación Pública &nbsp;·&nbsp; Mayo 2026 &nbsp;·&nbsp; Barranquilla &nbsp;·&nbsp; Universidad Del Norte</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -505,14 +568,23 @@ st.markdown("""
 # ─────────────────────────────────────────
 # BANNER SELECCIONADOS (visible solo si toggle activo)
 # ─────────────────────────────────────────
-total_seleccionados = int((df["Seleccionado"] == "Si").sum())
+total_op1 = int((df["Seleccionado"] == "Si (Opcion 1)").sum())
+total_op2 = int((df["Seleccionado"] == "Si (Opcion 2)").sum())
+total_seleccionados = total_op1 + total_op2
 
 if solo_seleccionados:
+    if f_opcion and len(f_opcion) == 1:
+        opcion_label = f_opcion[0]
+        color_opcion = "#818cf8" if "1" in f_opcion[0] else "#34d399"
+    else:
+        opcion_label = "Opción 1 + Opción 2"
+        color_opcion = "#4ade80"
+
     st.markdown(f"""
-    <div class="banner-seleccionados">
-        <div class="banner-dot"></div>
-        <span class="banner-text">Mostrando únicamente candidatos seleccionados</span>
-        <span class="banner-count">{len(df_f):,} / {total_seleccionados:,}</span>
+    <div class="banner-seleccionados" style="border-color:rgba(74,222,128,0.2);">
+        <div class="banner-dot" style="background:{color_opcion};box-shadow:0 0 8px {color_opcion}66;"></div>
+        <span class="banner-text">Seleccionados · {opcion_label}</span>
+        <span class="banner-count" style="color:{color_opcion};">{len(df_f):,} / {total_seleccionados:,}</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -531,19 +603,21 @@ if solo_seleccionados:
             f"{total:,}", "Seleccionados", "Vista filtrada", "kpi-violet"
         ), unsafe_allow_html=True)
     with k2:
+        op1_count = int((df_f["Seleccionado"] == "Si (Opcion 1)").sum())
         st.markdown(kpi_html(
-            f"{total_seleccionados:,}", "Total seleccionados",
-            f"{total_seleccionados / max(len(df), 1) * 100:.1f}% del universo", "kpi-green"
+            f"{op1_count:,}", "Opción 1",
+            f"{op1_count / max(total, 1) * 100:.1f}% del filtrado", "kpi-blue"
         ), unsafe_allow_html=True)
     with k3:
+        op2_count = int((df_f["Seleccionado"] == "Si (Opcion 2)").sum())
         st.markdown(kpi_html(
-            f"{en_rango:,}", "En rango 18–28",
-            f"{en_rango / max(total, 1) * 100:.1f}% del filtrado", "kpi-amber"
+            f"{op2_count:,}", "Opción 2",
+            f"{op2_count / max(total, 1) * 100:.1f}% del filtrado", "kpi-green"
         ), unsafe_allow_html=True)
     with k4:
         st.markdown(kpi_html(
-            f"{fuera:,}", "Fuera de rango",
-            f"{fuera / max(total, 1) * 100:.1f}% del filtrado", "kpi-blue"
+            f"{en_rango:,}", "En rango 18–28",
+            f"{en_rango / max(total, 1) * 100:.1f}% del filtrado", "kpi-amber"
         ), unsafe_allow_html=True)
 else:
     k1, k2, k3 = st.columns(3)
